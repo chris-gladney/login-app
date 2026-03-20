@@ -1,14 +1,44 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../utils/api.js";
 
 function SignInForm() {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
+
+        setMessage("");
+
+        api
+          .post("/auth/login", {
+            username,
+            password,
+          })
+          .then((res) => {
+            setMessage("Login successful");
+
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("user", JSON.stringify(res.data.user));
+
+            setUsername("");
+            setPassword("");
+
+            if (res.data.user.role === "admin") {
+              navigate("/add-items");
+            } else {
+              navigate("/purchase-items");
+            }
+          })
+          .catch((err) => {
+            setMessage(err.response?.data?.message || "Login failed");
+          });
       }}
     >
       <label htmlFor="username">User Name</label>
@@ -33,6 +63,8 @@ function SignInForm() {
       <Link to="/sign-up">
         <button>Sign Up</button>
       </Link>
+
+      {message && <p>{message}</p>}
     </form>
   );
 }
