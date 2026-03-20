@@ -1,0 +1,36 @@
+#root {
+  width: 100%;
+  justify-content: center;
+}
+
+form {
+  width: 350px;
+  height: 300px;
+  margin: auto;
+}
+
+form>* {
+  margin: 10px 0;
+}
+
+form>input {
+  margin-left: 10px;
+}
+
+form button {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+ul {
+  list-style: none;
+}
+
+.item-to-buy {
+  background-color: white;
+  border: solid 5px white;
+  border-radius: 20px;
+  width: 250px;
+  margin: 10px auto;
+
+}
