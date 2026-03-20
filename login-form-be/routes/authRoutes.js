@@ -32,7 +32,7 @@ router.post("/register", (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    return bycrpt.genSalt(10);
+    return bcrypt.genSalt(10);
   }).then((salt) => {
     return bcrypt.hash(password, salt)
   }).then((hashedPwassword) => {
