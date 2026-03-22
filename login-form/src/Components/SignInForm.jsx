@@ -33,7 +33,11 @@ function SignInForm() {
             if (res.data.user.role === "admin") {
               navigate("/add-items");
             } else {
-              navigate("/purchase-items");
+              if (res.data.user.role === "admin") {
+                navigate("/add-items");
+              } else {
+                navigate("/purchase-items");
+              }
             }
           })
           .catch((err) => {

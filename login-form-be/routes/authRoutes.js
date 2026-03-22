@@ -27,19 +27,25 @@ router.post("/register", (req, res) => {
       .json({ message: "Must be registering an admin or user" });
   }
 
-  User.findOne({ username }).then((existingUser) => {
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
-    }
+  User.findOne({ username })
+    .then((existingUser) => {
+      if (existingUser) {
+        return res.status(400).json({ message: "User already exists" });
+      }
 
-    return bcrypt.genSalt(10);
-  }).then((salt) => {
-    return bcrypt.hash(password, salt)
-  }).then((hashedPwassword) => {
-    return User.create({
-        username, password: hashedPwassword, role
+      return bcrypt.genSalt(10);
     })
-  }).then((user) => {
+    .then((salt) => {
+      return bcrypt.hash(password, salt);
+    })
+    .then((hashedPwassword) => {
+      return User.create({
+        username,
+        password: hashedPwassword,
+        role,
+      });
+    })
+    .then((user) => {
       return res.status(201).json({
         message: "User registered successfully",
         user: {
@@ -59,7 +65,9 @@ router.post("/login", (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).json({ message: "Please provide username and password" });
+    return res
+      .status(400)
+      .json({ message: "Please provide username and password" });
   }
 
   User.findOne({ username })
