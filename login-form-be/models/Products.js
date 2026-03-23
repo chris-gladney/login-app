@@ -13,18 +13,6 @@ const productSchema = new mongoose.Schema(
     description: {
       type: String,
     },
-    customers: [
-      {
-        user: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
-        },
-        pruchasedAt: {
-          type: Date,
-          default: Date.now,
-        },
-      },
-    ],
   },
   { timestamps: true },
 );

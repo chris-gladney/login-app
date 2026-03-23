@@ -45,3 +45,11 @@ export const adminOnly = (req, res, next) => {
 
   return res.status(403).json({ message: "Unauthorised access to non-admins" });
 };
+
+export const userOnly = (req, res, next) => {
+  if (req.user && req.user.role === "user") {
+    return next();
+  }
+
+  return res.status(403).json({ message: "Access denied. Users only." });
+};
