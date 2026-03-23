@@ -1,4 +1,5 @@
 import Item from "../SubComponents/Item";
+import LogOutButton from "../SubComponents/LogOutButton";
 
 const testItems = [
   {
@@ -37,6 +38,7 @@ function ItemsToBuy() {
           );
         })}
       </ul>
+      <LogOutButton />
     </section>
   );
 }
