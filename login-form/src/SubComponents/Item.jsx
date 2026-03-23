@@ -1,9 +1,8 @@
-function Item({ price, description, image }) {
+function Item({ price, name }) {
   return (
     <div className="item-to-buy">
       <p>{price}</p>
-      <p>{description}</p>
-      {/* <img src={image} /> */}
+      <p>{name}</p>
       <button>Purchase</button>
     </div>
   );
