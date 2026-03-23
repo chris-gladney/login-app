@@ -8,9 +8,8 @@ function LogOutButton() {
     localStorage.removeItem("user");
 
     navigate("/", { replace: true });
-
-    return <button onClick={handleLogout}>Logout</button>;
   };
+  return <button onClick={handleLogout}>Logout</button>;
 }
 
 export default LogOutButton;
